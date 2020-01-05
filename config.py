@@ -6,12 +6,23 @@ class Config(object):
     TESTING = False
     CSRF_ENABLED = True
     SECRET_KEY = 'this-really-needs-to-be-changed'
-    #SQLALCHEMY_DATABASE_URI = os.environ["DBHOST"]
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(
-        dbuser=os.environ['DBUSER'],
-        dbpass=os.environ['DBPASS'],
-        dbhost=os.environ['DBHOST'],
-        dbname=os.environ['DBNAME'])
+    IS_AZUR_DEPLOYMENT = True
+
+    if IS_AZUR_DEPLOYMENT :
+        dbuser = "admindb@dbazur"
+        dbpass = "0aDB2020"
+        dbhost = "dbazur.postgres.database.azure.com"
+        dbname = "dbazur"
+        
+        SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(
+            dbuser,dbpass,dbhost, dbname)
+    else :
+        SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(
+            dbuser=os.environ['DBUSER'],
+            dbpass=os.environ['DBPASS'],
+            dbhost=os.environ['DBHOST'],
+            dbname=os.environ['DBNAME'])
+    
 class ProductionConfig(Config):
     DEBUG = False
 
