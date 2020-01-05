@@ -14,10 +14,10 @@ class Config(object):
         dbhost = "dbazur.postgres.database.azure.com"
         dbname = "dbazur"
         
-        SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(
+        SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(\
             dbuser,dbpass,dbhost, dbname)
     else :
-        SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(
+        SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(\
             dbuser=os.environ['DBUSER'],
             dbpass=os.environ['DBPASS'],
             dbhost=os.environ['DBHOST'],
